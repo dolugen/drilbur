@@ -7,7 +7,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import './App.css';
+import 'bulma/css/bulma.css'
 import * as countries from './data/countries.json';
 import * as cities from './data/cities.json';
 import * as locations from './data/locations.json';
@@ -42,7 +42,7 @@ class PlacesViewer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="">
         <SearchForm onSearchTextChange={this.handlePlaceChange} />
         <PlacesList places={this.state.places} />
       </div>
@@ -74,24 +74,10 @@ const Place = (props) => {
 const PlacesList = (props) => {
   const places = props.places.map(place => <Place key={place.id} {...place} />)
   return (
-    <ul>
+    <ul className="is-size-3">
       {places}
     </ul>
   )
-}
-
-const CityListItem = ({city}) => {
-  const cityLink = `/countries/${city.country}/cities/${city.name}`
-  return <li>
-    <Link to={cityLink}>{city.name}</Link>
-  </li>
-}
-
-const LocationListItem = ({location}) => {
-  const locationLink = `/locations/${location.id}`
-  return <li>
-    <Link to={locationLink}>{location.location}</Link>
-  </li>
 }
 
 const Country = () => {
@@ -101,33 +87,33 @@ const Country = () => {
   const country = result[0]
   const cities = get_cities()
                   .filter(c => c.country === countryCode)
-                  .map(c => <CityListItem city={c} />)
+                  .map(c => <CityLinkItem countryCode={countryCode} cityName={c.name} />)
   const locations = get_locations()
                       .filter(l => l.country === countryCode)
-                      .map(l => <LocationListItem location={l} />)
+                      .map(l => <LocationLinkItem locationId={l.id} locationName={l.location} />)
   return (
     <div>
-      <h2>{country.name}</h2>
-      <h3>Links</h3>
-      <ul>
-        <li><a href={`${api_url}measurements?country=${country.code}`} target="_blank">Measurements</a></li>
-        <li><a href={`${api_url}latest?country=${country.code}`} target="_blank">Latest Measurements</a></li>
-      </ul>
-      <h3>Stats</h3>
+      <Breadcrumbs countryCode={countryCode} />
+      <h2 className="title is-2">{country.name}</h2>
       <ul>
         <li>Code: {country.code}</li>
         <li>Total measurements: {country.count}</li>
         <li>Total number of measurement stations: {country.locations}</li>
         <li>Number of cities with stations: {country.cities}</li>
       </ul>
-      <h3>Cities ({cities.length})</h3>
+      <h3 className="title is-3">Links</h3>
       <ul>
+        <li><a href={`${api_url}measurements?country=${country.code}`} target="_blank">Measurements (JSON response - opens in new window)</a></li>
+        <li><a href={`${api_url}latest?country=${country.code}`} target="_blank">Latest Measurements (JSON response - opens in new window)</a></li>
+      </ul>
+      <h3 className="title is-3">Cities ({cities.length})</h3>
+      <ol type="1" className="is-size-4">
         {cities}
-      </ul>
-      <h3>Stations ({locations.length})</h3>
-      <ul>
+      </ol>
+      <h3 className="title is-3">Stations ({locations.length})</h3>
+      <ol type="1" className="is-size-4">
         {locations}
-      </ul>
+      </ol>
     </div>
   )
 }
@@ -139,18 +125,18 @@ const City = () => {
   const city = result[0]
   const stations = get_locations()
                     .filter(l => l.country === countryCode && l.city === cityName)
-                    .map(l => <LocationListItem location={l} />)
+                    .map(l => <LocationLinkItem locationId={l.id} locationName={l.location} />)
   return (
     <div>
-      <h2>{cityName}</h2>
-      <h3>Stats</h3>
+      <Breadcrumbs countryCode={countryCode} cityName={cityName} />
+      <h2 className="title is-2">{cityName}</h2>
       <ul>
-        <li>Country code: {city.country}</li>
+        <li>Country: <Link to={`/countries/${city.country}`}>{city.country}</Link></li>
         <li>Total number of measurements: {city.count}</li>
         <li>Number of stations: {city.locations}</li>
       </ul>
-      <h3>Stations ({stations.length})</h3>
-      <ul>
+      <h3 className="title is-3">Stations ({stations.length})</h3>
+      <ul className="is-size-4">
         {stations}
       </ul>
     </div>
@@ -202,12 +188,16 @@ const Location = () => {
   const location = result[0]
   return (
     <div>
-      <h2>Location: {location.id}</h2>
-      <h3>Stats</h3>
+      <Breadcrumbs
+        countryCode={location.country}
+        cityName={location.city}
+        locationId={location.id}
+        locationName={location.location} />
+      <h2 className="title is-2">Location: {location.location}</h2>
       <ul>
-        <li>Name: {location.location}</li>
-        <li>Country: {location.country}</li>
-        <li>City: {location.city}</li>
+        <li>ID: {location.id}</li>
+        <li>Country: <Link to={`/countries/${location.country}`}>{location.country}</Link></li>
+        <li>City: <Link to={`/countries/${location.country}/cities/${location.city}`}>{location.city}</Link></li>
         <li>Source name: {location.sourceName}</li>
         <li>Source type: {location.government}</li>
         <li>Coordinates: {location.coordinates.longitude}, {location.coordinates.latitude}</li>
@@ -217,6 +207,29 @@ const Location = () => {
       </ul>
     </div>
   )
+}
+
+const Breadcrumbs = ({countryCode, cityName, locationName, locationId}) => {
+  return <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      {countryCode ? <CountryLinkItem countryCode={countryCode} /> : ''}
+      {countryCode && cityName ? <CityLinkItem countryCode={countryCode} cityName={cityName} /> : ''}
+      {locationName && locationId ? <LocationLinkItem locationName={locationName} locationId={locationId} /> : ''}
+    </ul>
+  </nav>
+}
+
+const CountryLinkItem = ({countryCode}) => {
+  return <li><Link to={`/countries/${countryCode}`}>{countryCode}</Link></li>
+}
+
+const CityLinkItem = ({countryCode, cityName}) => {
+  return <li><Link to={`/countries/${countryCode}/cities/${cityName}`}>{cityName}</Link></li>
+}
+
+const LocationLinkItem = ({locationName, locationId}) => {
+  return <li><Link to={`/locations/${locationId}`}>{locationName}</Link></li>
 }
 
 const findPlace = (place) => {
@@ -255,9 +268,10 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor="place">Search for a place: </label>
-        <input type="text" id="place" name="place" onChange={this.handleTextChange} />
+      <div class="field">
+        <label className="label">Search for a place: </label>
+        <input class="input is-large is-primary" type="text" onChange={this.handleTextChange} />
+        <p class="help">Name of a country, a city, or a station</p>
       </div>
     )
   }
@@ -278,9 +292,8 @@ const Nav = () => {
 function App() {
   return (
     <Router>
-      <div className="App">
-        <h1>Let's get some air quality data</h1>
-        <Nav />
+      <div className="">
+        <h1 class="title is-1 is-spaced">Let's get some air quality data</h1>
         <Switch>
             <Route path="/countries">
               <Countries />
