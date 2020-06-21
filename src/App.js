@@ -12,7 +12,9 @@ import * as countries from './data/countries.json';
 import * as cities from './data/cities.json';
 import * as locations from './data/locations.json';
 
-const get_countries = () => countries.results.filter(c => c.name)
+const api_url = 'https://api.openaq.org/v1/'
+
+const get_countries = () => countries.results
 const get_cities = () => cities.results
 const get_locations = () => locations.results
 
@@ -50,17 +52,21 @@ class PlacesViewer extends React.Component {
 
 const Place = (props) => {
   const placeType = props.placeType
+  let name
   let placeLink
   if (placeType === "country" || props.code) {
     placeLink = `/countries/${props.code}`
+    name = props.name || `Name Unknown (code: ${props.code})`
   } else if (placeType === "city") {
     placeLink = `/countries/${props.country}/cities/${props.name}/`
+    name = `${props.name}, ${props.country}`
   } else {
     placeLink = `/locations/${props.id}`
+    name = `${props.location}, ${props.city}, ${props.country}`
   }
   return (
     <li className={placeType}>
-      <Link to={placeLink}>{props.name || "Unknown"} {placeType ? `(${placeType})` : ''}</Link>
+      <Link to={placeLink}>{name || props.name}</Link>
     </li>
   )
 }
@@ -91,7 +97,6 @@ const LocationListItem = ({location}) => {
 const Country = () => {
   const { countryCode } = useParams()
   const result = get_countries().filter(country => country.code === countryCode)
-  console.log(result)
   if (result.length === 0) return <h2>Country with code "{countryCode}" not found.</h2>
   const country = result[0]
   const cities = get_cities()
@@ -103,6 +108,11 @@ const Country = () => {
   return (
     <div>
       <h2>{country.name}</h2>
+      <h3>Links</h3>
+      <ul>
+        <li><a href={`${api_url}measurements?country=${country.code}`} target="_blank">Measurements</a></li>
+        <li><a href={`${api_url}latest?country=${country.code}`} target="_blank">Latest Measurements</a></li>
+      </ul>
       <h3>Stats</h3>
       <ul>
         <li>Code: {country.code}</li>
@@ -163,6 +173,48 @@ const Countries = () => {
           <h2>Please select a country or a city.</h2>
         </Route>
       </Switch>
+    </div>
+  )
+}
+
+const Locations = () => {
+  let match = useRouteMatch()
+
+  return (
+    <div>
+      <Switch>
+        <Route path={`${match.path}/:locationId`}>
+          <Location />
+        </Route>
+        <Route path={match.path}>
+          <h2>Please select a location.</h2>
+        </Route>
+      </Switch>
+    </div>
+  )
+}
+
+const Location = () => {
+  const { locationId } = useParams()
+  const result = get_locations()
+                    .filter(l => l.id === locationId)
+  if (result.length === 0) return <h2>Location with ID {locationId} not found.</h2>
+  const location = result[0]
+  return (
+    <div>
+      <h2>Location: {location.id}</h2>
+      <h3>Stats</h3>
+      <ul>
+        <li>Name: {location.location}</li>
+        <li>Country: {location.country}</li>
+        <li>City: {location.city}</li>
+        <li>Source name: {location.sourceName}</li>
+        <li>Source type: {location.government}</li>
+        <li>Coordinates: {location.coordinates.longitude}, {location.coordinates.latitude}</li>
+        <li>First updated: {location.firstUpdated}</li>
+        <li>Last updated: {location.lastUpdated}</li>
+        <li>Pollutants measured: {location.parameters.join(', ')}</li>
+      </ul>
     </div>
   )
 }
@@ -232,6 +284,9 @@ function App() {
         <Switch>
             <Route path="/countries">
               <Countries />
+            </Route>
+            <Route path="/locations">
+              <Locations />
             </Route>
             <Route path="/">
               <PlacesViewer />
