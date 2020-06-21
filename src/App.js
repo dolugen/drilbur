@@ -7,7 +7,6 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import 'bulma/css/bulma.css'
 import * as countries from './data/countries.json';
 import * as cities from './data/cities.json';
 import * as locations from './data/locations.json';
@@ -74,7 +73,7 @@ const Place = (props) => {
 const PlacesList = (props) => {
   const places = props.places.map(place => <Place key={place.id} {...place} />)
   return (
-    <ul className="is-size-3">
+    <ul className="is-size-3 has-text-weight-bold">
       {places}
     </ul>
   )
@@ -269,7 +268,7 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div class="field">
-        <label className="label">Search for a place: </label>
+        <label className="label is-large">Search for a place: </label>
         <input class="input is-large is-primary" type="text" onChange={this.handleTextChange} />
         <p class="help">Name of a country, a city, or a station</p>
       </div>
@@ -293,7 +292,7 @@ function App() {
   return (
     <Router>
       <div className="">
-        <h1 class="title is-1 is-spaced">Let's get some air quality data</h1>
+        <h1 class="title is-1 is-size-1 is-spaced">Let's get some air quality data</h1>
         <Switch>
             <Route path="/countries">
               <Countries />
