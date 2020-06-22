@@ -278,7 +278,7 @@ class SearchForm extends React.Component {
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL || '/'}>
       <div className="">
         <h1 class="title is-1 is-size-1 is-spaced">Let's get some air quality data</h1>
         <Switch>
