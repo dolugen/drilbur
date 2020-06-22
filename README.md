@@ -2,6 +2,8 @@
 
 Helps you drill down into OpenAQ data.
 
+**Status: Experimental**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
