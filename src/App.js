@@ -276,18 +276,6 @@ class SearchForm extends React.Component {
   }
 }
 
-const Nav = () => {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-    </nav>
-  )
-}
-
 function App() {
   return (
     <Router>
