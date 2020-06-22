@@ -1,5 +1,7 @@
 ## Drilbur
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8c061fb4-4db0-4f2e-8a9a-7a4614d3f776/deploy-status)](https://app.netlify.com/sites/drilbur/deploys)
+
 Helps you drill down into OpenAQ data.
 
 **Status: Experimental**
