@@ -102,8 +102,8 @@ const Country = () => {
       </ul>
       <h3 className="title is-3">Links</h3>
       <ul>
-        <li><a href={`${api_url}measurements?country=${country.code}`} target="_blank">Measurements (JSON response - opens in new window)</a></li>
-        <li><a href={`${api_url}latest?country=${country.code}`} target="_blank">Latest Measurements (JSON response - opens in new window)</a></li>
+        <li><a href={`${api_url}measurements?country=${country.code}`} rel="noopener noreferrer" target="_blank">Measurements (JSON response - opens in new window)</a></li>
+        <li><a href={`${api_url}latest?country=${country.code}`} rel="noopener noreferrer" target="_blank">Latest Measurements (JSON response - opens in new window)</a></li>
       </ul>
       <h3 className="title is-3">Cities ({cities.length})</h3>
       <ol type="1" className="is-size-4">
