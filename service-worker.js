@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://dolugen.github.io/drilbur/precache-manifest.9a49b4b45459848934c031455b5f4f27.js"
+  "https://dolugen.github.io/drilbur/precache-manifest.2acb3efc7c66ed44fac4bcc951d89bb1.js"
 );
 
 self.addEventListener('message', (event) => {
