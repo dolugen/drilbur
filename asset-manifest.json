@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "https://dolugen.github.io/drilbur/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "https://dolugen.github.io/drilbur/static/js/main.79cb8ca9.chunk.js",
-    "main.js.map": "https://dolugen.github.io/drilbur/static/js/main.79cb8ca9.chunk.js.map",
-    "runtime-main.js": "https://dolugen.github.io/drilbur/static/js/runtime-main.d4b71e9e.js",
-    "runtime-main.js.map": "https://dolugen.github.io/drilbur/static/js/runtime-main.d4b71e9e.js.map",
-    "static/js/2.8c452cad.chunk.js": "https://dolugen.github.io/drilbur/static/js/2.8c452cad.chunk.js",
-    "static/js/2.8c452cad.chunk.js.map": "https://dolugen.github.io/drilbur/static/js/2.8c452cad.chunk.js.map",
-    "index.html": "https://dolugen.github.io/drilbur/index.html",
-    "precache-manifest.2acb3efc7c66ed44fac4bcc951d89bb1.js": "https://dolugen.github.io/drilbur/precache-manifest.2acb3efc7c66ed44fac4bcc951d89bb1.js",
-    "service-worker.js": "https://dolugen.github.io/drilbur/service-worker.js",
-    "static/css/main.5ecd60fb.chunk.css.map": "https://dolugen.github.io/drilbur/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.8c452cad.chunk.js.LICENSE.txt": "https://dolugen.github.io/drilbur/static/js/2.8c452cad.chunk.js.LICENSE.txt"
+    "main.css": "/drilbur/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/drilbur/static/js/main.ca878d69.chunk.js",
+    "main.js.map": "/drilbur/static/js/main.ca878d69.chunk.js.map",
+    "runtime-main.js": "/drilbur/static/js/runtime-main.962de81e.js",
+    "runtime-main.js.map": "/drilbur/static/js/runtime-main.962de81e.js.map",
+    "static/js/2.8c452cad.chunk.js": "/drilbur/static/js/2.8c452cad.chunk.js",
+    "static/js/2.8c452cad.chunk.js.map": "/drilbur/static/js/2.8c452cad.chunk.js.map",
+    "index.html": "/drilbur/index.html",
+    "precache-manifest.229a3e355b89fefd7d9562a3fc4f526a.js": "/drilbur/precache-manifest.229a3e355b89fefd7d9562a3fc4f526a.js",
+    "service-worker.js": "/drilbur/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/drilbur/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.8c452cad.chunk.js.LICENSE.txt": "/drilbur/static/js/2.8c452cad.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d4b71e9e.js",
+    "static/js/runtime-main.962de81e.js",
     "static/js/2.8c452cad.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.79cb8ca9.chunk.js"
+    "static/js/main.ca878d69.chunk.js"
   ]
 }
