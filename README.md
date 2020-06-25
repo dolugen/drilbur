@@ -8,6 +8,54 @@ Helps you drill down into OpenAQ data.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Search data
+
+The app is using data generated from the API database for search.
+
+### GraphQL queries for generating the search files
+
+#### Locations
+
+```
+query LocationsForSearch {
+  locations_aggregate {
+    aggregate {
+      count
+    }
+  }
+  locations {
+    location
+    id
+    country
+    city
+  }
+}
+```
+
+#### Cities
+
+```
+query CitiesForSearch {
+  cities_aggregate {
+    aggregate {
+      count
+    }
+  }
+  cities {
+    country
+    name
+  }
+}
+```
+
+### Countries list
+
+Since country names aren't stored in the database, let's look them up from the API.
+
+```
+curl https://api.openaq.org/v1/countries?limit=200 > countries.json
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

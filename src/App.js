@@ -7,15 +7,15 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import * as countries from './data/countries.json';
-import * as cities from './data/cities.json';
-import * as locations from './data/locations.json';
+import * as countries_data from './data/countries.json';
+import * as cities_data from './data/cities.json';
+import * as locations_data from './data/locations.json';
 
 const api_url = 'https://api.openaq.org/v1/'
 
-const get_countries = () => countries.results
-const get_cities = () => cities.results
-const get_locations = () => locations.results
+const get_countries = () => countries_data.results
+const get_cities = () => cities_data.data.cities
+const get_locations = () => locations_data.data.locations
 
 class PlacesViewer extends React.Component {
   constructor(props) {
@@ -197,12 +197,12 @@ const Location = () => {
         <li>ID: {location.id}</li>
         <li>Country: <Link to={`/countries/${location.country}`}>{location.country}</Link></li>
         <li>City: <Link to={`/countries/${location.country}/cities/${location.city}`}>{location.city}</Link></li>
-        <li>Source name: {location.sourceName}</li>
+        {/* <li>Source name: {location.sourceName}</li>
         <li>Source type: {location.government}</li>
         <li>Coordinates: {location.coordinates.longitude}, {location.coordinates.latitude}</li>
         <li>First updated: {location.firstUpdated}</li>
         <li>Last updated: {location.lastUpdated}</li>
-        <li>Pollutants measured: {location.parameters.join(', ')}</li>
+        <li>Pollutants measured: {location.parameters.join(', ')}</li> */}
       </ul>
     </div>
   )
