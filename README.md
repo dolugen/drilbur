@@ -8,9 +8,33 @@ Helps you drill down into OpenAQ data.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Ideas for further development
+
+Currently the app allows for quick search for available places, and show their stub profile pages.
+
+Here are some ideas for further improvements.
+There are no concrete timeline for this, and it can change at any time.
+
+- Data access methods on place profiles
+  Provide code snippets for access methods such as
+  cURL, HTTP, R, Python using existing community tools.
+  
+- Additional places stats for context, such as:
+  - Population
+  - Weather, humidity, air pressure, etc.
+  - Geo data: elevation, terrain type, etc.
+  - Plus any other data regarding the city (e.g. transportation related)
+
+- Stats related to air quality data availability for places
+  - Example data points:
+    - Number of active stations (in the world, in a country, etc.)
+    - Stations per city
+    - Stations per capita
+    - Cities without stations
+
 ## Search data
 
-The app is using data generated from the API database for search.
+The search data is generated from the API. Here the data retrieval method is documented for future use.
 
 ### GraphQL queries for generating the search files
 
